@@ -102,6 +102,7 @@ exports.updateForm = function (req, res) {
     });
 };
 
+
 exports.update = function (req, res) {
 
     Category.findOne({_id: req.body._id}, function (err, category) {
