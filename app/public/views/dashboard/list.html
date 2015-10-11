@@ -1,0 +1,22 @@
+{% extends '../layouts/main.html' %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li class="active">Dashboard</li>
+</ol>
+
+<ul id="dashboard">
+    <a href="/account/"><li>Account</li></a>
+    <a href="/categories/"><li>Categories</li></a>
+    <a href="/tags/"><li>Tags</li></a>
+    <a href="/brands/"><li>Brands</li></a>
+    <a href="/products/"><li>Products</li></a>
+    <!--<a href="/logout/"><li>Logout</li></a>-->
+</ul>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}

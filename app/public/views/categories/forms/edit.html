@@ -1,0 +1,62 @@
+{% extends '../../layouts/dashboard.html' %}
+
+{% block title %} Edit Category {% endblock %}
+
+{% block content %}
+{% parent %}
+
+<form id="editCategory" onsubmit="return false;" method="post" enctype="multipart/form-data">
+    <input type="hidden" value="{{ category._id | safe }}" name="_id">
+    <table align="center">
+        <div id="input">
+            <tr><div id="input_name">Name</div></tr>
+            <tr><input type="text" id="identity" name="identity" value="{{ category.identity }}"></tr>
+        </div>
+        <div id="input">
+            <tr><div id="input_name">Segment URL</div></tr>
+            <tr><input type="text" id="segment_url" name="segment_url" value="{{ category.segment_url }}"></tr>
+        </div>
+        <div id="input">
+            <tr><div id="input_name">Key Words</div></tr>
+            <tr><input type="text" id="key_words" name="key_words" value="{{ category.key_words }}"></tr>
+        </div>
+        <div id="input">
+            <tr><div id="input_name">Description</div></tr>
+            <tr><input type="textarea" id="description" name="description" value="{{ category.description }}"></tr>
+        </div>
+
+        <div id="input">
+        <tr><div id="input_name">Logo</div></tr>
+        <tr>
+            <div id="edit_image" onclick="check_logo()"><img src="{{ category.logo }}" name= "old_logo" id="image_style"><br>
+                <div id="checkbox-text">Delete?</div><input type="checkbox" name="delete_logo" id="delete_logo"></div>
+        </tr>
+        </div>
+
+        <div id="input">
+            <tr><div id="input_name">New Logo</div></tr>
+            <tr><input type="file" name="new_logo" id="new_logo"></tr>
+        </div>
+        <div id="input">
+            <tr><div id="input_name">Content</div></tr>
+            <tr><textarea rows="10" cols="38" id="cont" name="cont">{{ category.cont }}</textarea></tr>
+        </div>
+    </table>
+    <!--SUBMIT BUTTON -->
+    <input type="submit" value="SUBMIT" onClick="formValidation()">
+    <input type="button" onClick="location.href='/categories/'" value="CANCEL">
+
+</form>
+
+
+
+<!-- JavaScript -->
+<script src="/js/editCategory.js" type="text/javascript"></script>
+
+<script>
+    function check_logo(){
+        document.getElementById("delete_logo").checked =  !document.getElementById("delete_logo").checked;
+    }
+</script>
+
+{% endblock %}

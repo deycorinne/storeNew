@@ -1,0 +1,76 @@
+{% extends '../layouts/main.html' %}
+
+{% block title %} Registration {% endblock %}
+
+{% block content %}
+
+        <!-- Begin Registration Form -->
+        <div id="form">
+            <div id="form_title">SIGN UP</div>
+        <div id="rules">Create an account to join today.</div>
+
+
+        <!-- CREATE REGISTRATION FORM:
+            * NAME, PHONE, EMAIL, PW, REPEAT PW,
+            * ADDRESS, POSTCODE
+        -->
+
+        <form id="registration" onsubmit="return false;" action="/registration" method="post">
+            <div align="center">
+                <div id="input">
+                    <tr><div id="input_name">First Name</div></tr>
+                    <tr><input type="text" id="firstname" name ="firstname"></tr>
+                </div>
+
+                <div id="input">
+                    <tr><div id="input_name">Last Name</div></tr>
+                    <tr><input type="text" id="lastname" name ="lastname"></tr>
+                </div>
+
+
+                <div id="input">
+                    <tr><div id="input_name">Email Address</div></tr>
+                    <tr><input type="text" id="email" name="email"></tr>
+                </div>
+
+
+                <div id="input">
+                    <tr><div id="input_name">Phone</div></tr>
+                    <tr><input type="number" id="phone" name="phone"></tr>
+                </div>
+
+                <div id="input">
+                    <tr><div id="input_name">Password</div></tr>
+                    <tr><input type="password" id="bob" name="bob"></tr>
+                </div>
+
+
+                <div id="input">
+                    <tr><div id="input_name">Repeat Password</div></tr>
+                    <tr><input type="password" id="passwordrep" ></tr>
+                </div>
+
+
+                <div id="input">
+                    <tr><div id="input_name">Home Address</div></tr>
+                    <tr><input type="text" id="address" name="address"></tr>
+                </div>
+
+
+                <div id="input">
+                    <tr><div id="input_name">Postal Code</div></tr>
+                    <tr><input type="number" id="postcode" name="postcode"></tr>
+                </div>
+            </table>
+
+
+            <!--SUBMIT BUTTON -->
+            <input type="submit" value="SUBMIT" onClick="formValidation()">
+
+        </form>
+        </div>
+
+        <!-- JavaScript -->
+        <script src="/js/registration.js" type="text/javascript"></script>
+
+{% endblock %}

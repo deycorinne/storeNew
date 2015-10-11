@@ -1,0 +1,18 @@
+{% extends './main.html' %}
+
+{% block content %}
+    {% if breadcrumbs %}
+        <ol class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.last %}
+                    <li class="active">{{ breadcrumb.title }}</li>
+                {% else %}
+                    <li>
+                        <a href="{{ breadcrumb.link }}">{{ breadcrumb.title }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    {% endif %}
+
+{% endblock %}

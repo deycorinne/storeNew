@@ -1,0 +1,38 @@
+{% extends '../../layouts/dashboard.html' %}
+{% import "../../includes/macros.html" as macro %}
+{% block title %} Shop {% endblock %}
+
+{% block content %}
+{% parent %}
+
+<div id="category_name" style="background-image:url({{ category.logo }})"></div>
+<!--<div id="h_line"></div>-->
+
+
+<div id="items">
+
+    {% for product in products %}
+
+    <a href="/item/{{product.segment_url}}.html">
+        <div id="item_frame_cat">
+            <div id="item_image"><img src="{{ product.poster }}"></div>
+            <div id="item_name">{{ product.identity }}</div>
+            <div id="item_info">
+                <div id="item_price">${{ product.price }}</div>
+            </div>
+        </div>
+    </a>
+
+    {% endfor %}
+
+</div>
+
+
+<div id="page_navigation">
+    {{ macro.pagination(page, perPage, count, totalPages) }}
+</div>
+
+
+
+
+{% endblock %}

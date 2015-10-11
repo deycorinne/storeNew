@@ -1,0 +1,44 @@
+{% extends '../layouts/dashboard.html' %}
+
+{% block title %} Edit Brand {% endblock %}
+
+{% block content %}
+{% parent %}
+
+<form id="edit_brand" onsubmit="return false;" method="post" enctype="multipart/form-data">
+    <input type="hidden" value="{{ brand._id | safe }}" name="_id">
+    <table align="center">
+        <div id="input">
+            <tr><div id="input_name">Name</div></tr>
+            <tr><input type="text" id="identity" name="identity" value="{{ brand.identity }}"></tr>
+        </div>
+        <div id="input">
+            <tr><div id="input_name">Segment URL</div></tr>
+            <tr><input type="text" id="segment_url" name="segment_url" value="{{ brand.segment_url }}"></tr>
+        </div>
+        <div id="input">
+            <tr><div id="input_name">Key Words</div></tr>
+            <tr><input type="text" id="key_words" name="key_words" value="{{ brand.key_words }}"></tr>
+        </div>
+        <div id="input">
+            <tr><div id="input_name">Description</div></tr>
+            <tr><input type="textarea" id="description" name="description" value="{{ brand.description }}"></tr>
+        </div>
+        <div id="input">
+            <tr><div id="input_name">Content</div></tr>
+            <tr><textarea rows="10" cols="38" id="cont" name="cont">{{brand.cont}}</textarea></tr>
+        </div>
+    </table>
+    <!--SUBMIT BUTTON -->
+    <input type="submit" value="SUBMIT" onClick="formValidation()">
+    <input type="button" onClick="location.href='/brands/'" value="CANCEL">
+
+</form>
+
+
+
+<!-- JavaScript -->
+<script src="/js/edit_brand.js" type="text/javascript"></script>
+
+
+{% endblock %}

@@ -1,0 +1,202 @@
+{% extends '../layouts/dashboard.html' %}
+
+{% block title %} Edit Product {% endblock %}
+
+{% block content %}
+{% parent %}
+
+<div id="error">{{ error }}</div>
+
+<form id="edit_product" onsubmit="return false;" method="post" enctype="multipart/form-data">
+    <input type="hidden" value="{{ product._id | safe }}" name="_id">
+
+    <div id="left">
+        <table>
+
+            <div id="input">
+                <tr><div id="input_name">Name</div></tr>
+                <tr><input type="text" id="identity" name="identity" value="{{ product.identity }}"></tr>
+            </div>
+
+            <div id="input">
+                <tr><div id="input_name">Price</div></tr>
+                <tr><input type="text" id="price" name="price" value="{{ product.price }}"></tr>
+            </div>
+
+            <div id="input">
+                <tr><div id="input_name">Tags</div></tr>
+                <tr><select multiple id="tag" name="tag">
+                    {% for tag in product.tags %}
+                    <option value="{{ tag }}" selected>{{ tag }}</option>
+                    {% endfor %}
+                    {% for tag in tags %}
+                    <option value="{{ tag.identity }}">{{ tag.identity }}</option>
+                    {% endfor %}
+                </select>
+
+                </tr>
+            </div>
+
+            <div id="input">
+                <tr><div id="input_name">Status</div></tr>
+                <tr>
+                    <div id="checkbox-outline">
+                        {% if product.active == true %}
+                        <input type="checkbox" name="active" checked><div id="checkbox-text">Active</div><br>
+                        {% else %}
+                        <input type="checkbox" name="active"><div id="checkbox-text">Active</div><br>
+                        {% endif %}
+
+                        {% if product.isIndexPage == true %}
+                        <input type="checkbox" name="isIndexPage" checked><div id="checkbox-text">Index Page</div>
+                        {% else %}
+                        <input type="checkbox" name="isIndexPage"><div id="checkbox-text">Index Page</div>
+                        {% endif %}
+                    </div>
+                </tr>
+            </div>
+
+            <div id="input">
+                <tr><div id="input_name">Content</div></tr>
+                <tr><textarea rows="4" cols="32" id="cont" name="cont" >{{ product.content }}</textarea></tr>
+            </div>
+
+        </table>
+    </div>
+
+
+    <div id="right">
+        <table>
+
+            <div id="input">
+                <tr><div id="input_name">Segment URL</div></tr>
+                <tr><input type="text" id="segment_url" name="segment_url" value="{{ product.segment_url }}"></tr>
+            </div>
+
+            <div id="input">
+                <tr><div id="input_name">Category</div></tr>
+                <tr><select id="category" name="category">
+                    <option value="{{ product.category }}" selected>{{product.category }}</option>
+                    {% for category in categories %}
+                    <option value="{{ category.identity }}">{{ category.identity }}</option>
+                    {% endfor %}
+                </select></tr>
+            </div>
+
+            <div id="input">
+                <tr><div id="input_name">Brands</div></tr>
+                <tr><select id="brand" name="brand">
+                    <option value="{{ product.brands }}">{{ product.brands }}</option>
+                    {% for brand in brands %}
+                    <option value="{{ brand.identity }}">{{ brand.identity }}</option>
+                    {% endfor %}
+                </select></tr>
+            </div>
+
+            <div id="input">
+                <tr><div id="input_name">Poster</div></tr>
+                <tr>
+                    <div id="edit_image" name="edit_poster" onclick="check_poster()"><img src="{{ product.poster }}" name= "old_poster" id="image_style"><br>
+                        <div id="checkbox-text">Delete?</div><input type="checkbox" name="delete_poster" id="delete_poster"></div>
+                </tr>
+                <div id="input">
+                    <tr><div id="input_name">Upload New Poster</div></tr>
+                    <tr><input type="file" name="new_poster" id="new_poster"></tr>
+                </div>
+            </div>
+
+        </table>
+    </div>
+
+    <div id="last">
+
+        <div id="input">
+            <tr><div id="input_name">Images</div></tr>
+            <tr><div id="image_box"">
+                {% for image in product.images  %}
+                <div id="edit_image" name= "{{ image }}" onclick="check(this)">
+                    <img src="{{ image }}" id="image_style"><br>
+                    <div id="checkbox-text">Delete?</div><input type="checkbox" id="{{ image }}">
+                </div>
+                {% endfor %}
+            </div>
+            </tr>
+        </div>
+        <div id="input">
+            <tr><div id="input_name">Upload New Images</div></tr>
+            <tr><input type="file" name="new_image" id="new_image" multiple></tr>
+        </div>
+
+    </div>
+
+
+    <!--SUBMIT BUTTON -->
+    <input type="submit" value="SUBMIT" onClick="image_validation()">
+    <input type="button" onClick="location.href='/products/'" value="CANCEL">
+
+</form>
+
+
+
+
+<!-- JavaScript -->
+<script src="/js/edit_product.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script>
+    var image = document.getElementById('new_image');
+
+    var total = {{ product.images.length }};
+
+    function image_validation(){
+
+        for(var i = 0; i < {{ product.images.length }}; i++){
+            var array = {{ product.images|json|safe }};
+            var value = document.getElementById(array[i]);
+
+            value.setAttribute("name", "image" + i);
+            if(value.checked){
+                total -= 1;
+                console.log(value.getAttribute("name"));
+            }
+           console.log("Total = " + total);
+        }
+
+        if (total === 0){
+            if (image.files.length === 0) {
+                alert("Each product must have at least one image!");
+            } else if (image.files.length > 5) {
+                alert("You can only upload five images per product!");
+            } else{
+                alert("ok");
+                formValidation();
+            }
+        } else {
+            if(image.files.length + total > 5){
+                alert("You can only upload five images per product!");
+            } else {
+                //alert("ok");
+                formValidation();
+            }
+        }
+    }
+
+
+    function check(item){
+        var name = item.getAttribute("name");
+        document.getElementById(name).checked =  !document.getElementById(name).checked;
+    }
+
+    function check_poster(){
+        document.getElementById("delete_poster").checked =  !document.getElementById("delete_poster").checked;
+    }
+
+
+
+
+
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,28 @@
+
+{% macro pagination(page, perPage, count, totalPages) %}
+
+ {% if totalPages != 1 %}
+
+    {% if page != 1 %}
+        <div id="beginning"><a href="{{url}}?page=1">&laquo</a></div>
+    {% endif %}
+
+
+    {% for i in Array(totalPages) %}
+
+        {% if loop.index == page %}
+            <div id="active_page"><a href="{{url}}??page={{ loop.index }}">{{ loop.index }}</a></div>
+        {% else %}
+            <a href="{{url}}?page={{ loop.index }}">{{ loop.index }}</a>
+        {% endif %}
+
+    {% endfor %}
+
+
+    {% if page != totalPages %}
+        <div id="ending"><a href="{{url}}?page={{ totalPages }}">&raquo</a></div>
+    {% endif %}
+
+{% endif %}
+{% endmacro %}
+

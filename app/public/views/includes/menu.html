@@ -1,0 +1,31 @@
+
+<div id="top">
+    <div id="store_name">NATION COUTURE.</div>
+
+    <div id="navigation">
+
+        {% if req.isAuthenticated() %}
+
+            <div id="user_menu">
+                WELCOME,<a href='/account/'>{{ req.user.email }}</a>
+                <a href='/'>SHOP</a>
+                <a href='/dashboard/'>DASHBOARD</a>
+                <a href='/logout/'>LOGOUT</a>
+            </div>
+
+        {% else %}
+
+            <div id="guest_menu">
+                <a href='/login/'>LOGIN</a>
+                <a href='/registration/'>SIGN UP</a>
+            </div>
+
+        {% endif %}
+
+
+        <!--<input type="search" id="search" placeholder="Search..." />-->
+
+
+    </div>
+
+</div>

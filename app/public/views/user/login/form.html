@@ -1,0 +1,46 @@
+{% extends '../layouts/main.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+    <!-- Begin Login Form -->
+    <div id="form">
+        <div id="form_title">LOGIN</div>
+        <div id="rules">For returning customers.</div>
+
+        <!-- CREATE LOGIN FORM:
+            * USERNAME, PASSWORD
+        -->
+
+        <form id="login" onsubmit="return false;" action="/login" method="post">
+            <table align="center">
+                <div id="input">
+                <tr><div id="input_name">Email Address</div></tr>
+                <tr><input type="text" id="email" name="email"></tr>
+                </div>
+                <div id="input">
+                <tr><div id="input_name">Password</div></tr>
+                <tr><input type="password" id="password" name="password"></tr>
+                </div>
+            </table>
+
+
+            <!--SUBMIT BUTTON -->
+        <input type="submit" value="LOGIN" onClick="loginValidation()">
+
+
+
+
+        <a href="/restore_password/"><p>Forgot your password?</p></a>
+
+        </form>
+
+
+    </div>
+
+        <!-- JavaScript -->
+        <script src="/js/login.js" type="text/javascript"></script>
+
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'layouts/main.html' %}
+{% import "./includes/macros.html" as macro %}
+{% block title %} Nation Couture {% endblock %}
+{% block content %}
+
+
+<div id="promotion">
+    SHOP BY CATEGORY
+    <p>{% for category in categories %}
+    <a href="/category/{{ category.segment_url}}.html">Shop {{ category.identity }}</a>
+    {% endfor %}</p>
+</div>
+
+<div id="items">
+
+
+    {% for product in products %}
+
+
+        <div id="{{ product.identity }}" style="display:inline-block">
+        <a href="/item/{{product.segment_url}}.html">
+        <div id="item_frame">
+            <div id="item_image"><img src="{{ product.poster }}"></div>
+            <div id="item_name">{{ product.identity }}</div>
+            <div id="item_info">
+            <div id="item_price">${{ product.price }}</div>
+            </div>
+        </div>
+        </a>
+        </div>
+
+    {% endfor %}
+
+</div>
+
+<div id="page_navigation">
+    {{ macro.pagination(page, perPage, count, totalPages) }}
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends '../layouts/dashboard.html' %}
+
+{% block title %} Create Product {% endblock %}
+
+{% block content %}
+{% parent %}
+
+<div id="error">{{ error }}</div>
+
+<!-- Begin Form -->
+<form id="create_product" onsubmit="return false" method="post" enctype="multipart/form-data" >
+    <table align="center">
+       <div id="input">
+
+            <tr><div id="input_name">Name</div></tr>
+            <tr><input type="text" id="identity" name="identity"></tr>
+        </div>
+        <div id="input">
+            <tr><div id="input_name">Segment URL</div></tr>
+            <tr><input type="text" id="segment_url" name="segment_url"></tr>
+        </div>
+        <div id="input">
+            <tr><div id="input_name">Price (USD)</div></tr>
+            <tr><input type="text" id="price" name="price"></tr>
+        </div>
+        <div id="input">
+            <tr><div id="input_name">Category</div></tr>
+            <tr><select id="category" name="category">
+                {% for category in categories %}
+                <option value="{{ category.identity }}">{{ category.identity }}</option>
+                {% endfor %}
+            </select></tr>
+        </div>
+        <div id="input">
+            <tr><div id="input_name">Tags</div></tr>
+            <tr><select multiple id="tag" name="tag">
+                {% for tag in tags %}
+                <option value="{{ tag.identity }}">{{ tag.identity }}</option>
+                {% endfor %}
+            </select></tr>
+        </div>
+
+        <div id="input">
+            <tr><div id="input_name">Brands</div></tr>
+            <tr><select id="brand" name="brand">
+                {% for brand in brands %}
+                <option value="{{ brand.identity }}">{{ brand.identity }}</option>
+                {% endfor %}
+            </select></tr>
+        </div>
+        <div id="input">
+            <tr><div id="input_name">Poster</div></tr>
+            <tr><input type="file" name="poster" id="poster"></tr>
+        </div>
+        <div id="input">
+            <tr><div id="input_name">Content</div></tr>
+            <tr><textarea rows="10" cols="38" id="cont" name="cont"></textarea></tr>
+        </div>
+        <div id="input">
+             <tr><div id="input_name">Status</div></tr>
+             <tr>
+                 <div id="checkbox-outline">
+                 <input type="checkbox" name="active"><div id="checkbox-text">Active</div><BR>
+                 <input type="checkbox" name="isIndexPage"><div id="checkbox-text">Index Page</div>
+                 </div>
+             </tr>
+
+         </div>
+       <div id="input">
+        <tr><div id="input_name">Images (Upload limit: 5)</div></tr>
+        <tr><input type="file" name="image" id="image" multiple></tr>
+    </div>
+    </table>
+    <!--SUBMIT BUTTON -->
+    <input type="submit" value="SUBMIT" onClick="formValidation()">
+    <input type="button" onClick="location.href='/products/'" value="CANCEL">
+
+
+</form>
+
+<!-- JavaScript -->
+<script src="/js/create_product.js" type="text/javascript"></script>
+
+
+{% endblock %}
