@@ -25,11 +25,11 @@ CategorySchema.methods.save_image = function(file, cb) {
 
     var $this = this;
     console.log("File:" + file);
-   fs.rename(file.path, './public/logos/' + file.name, function (err) { // system path
+   fs.rename(file.path, './public/images/logos/' + file.name, function (err) { // system path
         if (err) {
             return cb(err);
         }
-       $this.logo = '/logos/' + file.name; // browser path
+       $this.logo = 'public/images/logos/' + file.name; // browser path
        $this.save(cb);
     });
 };

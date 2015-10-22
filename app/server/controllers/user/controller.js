@@ -20,7 +20,7 @@ server = email.server.connect({
 exports.url_end = url_end;
 
 exports.login = function (req, res) {
-    res.render('login/login', {title: 'Login'});
+    res.render('user/login/form', {title: 'Login'});
 };
 
 
@@ -101,7 +101,7 @@ exports.updatePassword = function (req, res) {
 
 
 exports.registerForm = function (req, res) {
-    res.render('registration/registration', {title: 'Registration'});
+    res.render('user/registration/form', {title: 'Registration'});
 };
 
 

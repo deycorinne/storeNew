@@ -35,7 +35,7 @@ ProductSchema.methods.save_poster = function(file, cb) {
         if (err) {
             return cb(err);
         }
-        $this.poster = '/posters/' + file.name; // browser path
+        $this.poster = '/public/images/posters/' + file.name; // browser path
         $this.save(cb);
     });
 };
