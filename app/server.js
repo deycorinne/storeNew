@@ -24,17 +24,13 @@ fs.readdirSync(dir).forEach(function (folder) {
 });
 
 // view engine setup
-// This is where all the magic happens!
 app.engine('html', swig.renderFile);
 
 app.set('view engine', 'html');
 app.set('views', __dirname + '/public/views');
-
-// Swig will cache templates for you, but you can disable
-// that and use Express's caching instead, if you like:
 app.set('view cache', false);
 
-// To disable Swig's cache, do the following:
+// disable Swig's cache
 swig.setDefaults({cache: false});
 swig.setFilter('contains', function(arr, value) {
     return arr.indexOf(value) !== -1;
@@ -76,9 +72,8 @@ app.use(function (req, res, next) {
     next();
 });
 
-/************** CAN BE MODIFIED********************/
+// can change
 require('./server/routes/index.js')(app);
-/**************************************************/
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -115,5 +110,3 @@ app.set('port', process.env.PORT || 3000);
 var server = app.listen(app.get('port'), function () {
     console.log('Store server listening on port ' + server.address().port);
 });
-
-// still refactoring old code-- a lot of errors
