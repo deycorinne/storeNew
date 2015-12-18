@@ -36,6 +36,7 @@ exports.verify = function(req, res) {
     email: req.body.email
   }).exec(function(err, user) {
     if (err) {
+      console.log(err);
       return res.render('error/error', {
         title: 'Oops!',
         error: 'Something went wrong. Please return to the login page and try again.'
@@ -50,14 +51,32 @@ exports.verify = function(req, res) {
     }
 
     bcrypt.compare(req.body.password, user.password, function(err, result) {
-      if (res) {
-        req.logIn(user, function(err) {
-          if (err) {
-            return res.status(400).send(err);
-          }
-          res.redirect('/dashboard/');
+      if (err) {
+        console.log(err);
+        return res.render('error/error', {
+          title: 'Oops!',
+          error: 'Something went wrong decrypting your password. Please contact our admins to figure out the problem.'
         });
       }
+
+      if (!result) {
+        console.log(result);
+        return res.render('error/error', {
+          title: 'Invalid Credentials',
+          error: 'The password you entered was incorrect. \n Please return to the login screen and try again.'
+        });
+      }
+
+      req.logIn(user, function(err) {
+        if (err) {
+          console.log(err);
+          return res.render('error/error', {
+            title: 'Oops!',
+            error: 'Something went wrong logging you in. Please contact our admins to figure out the problem.'
+          });
+        }
+        res.redirect('/dashboard/');
+      });
     });
   });
 };
@@ -75,22 +94,43 @@ exports.resetPassword = function(req, res) {
   }, function(err, user) {
     if (err) {
       console.log(err);
+      return res.render('error/error', {
+        title: 'Oops!',
+        error: 'Something went wrong resetting your password. Please contact our admins to figure out the problem.'
+      });
+    }
+
+    if (user == null || !user) {
+      console.log(err);
+      return res.render('error/error', {
+        title: 'Oops!',
+        error: 'Something went wrong resetting your password. Please contact our admins to figure out the problem.'
+      });
     }
 
     user.hash_pw(function(err, hash) {
       if (err) {
         console.log(err);
+        return res.render('error/error', {
+          title: 'Oops!',
+          error: 'Something went wrong resetting your password. Please contact our admins to figure out the problem.'
+        });
       }
 
       user.password = hash;
-      user.save();
+      user.save(function(err, user) {
+        if (err) {
+          console.log(err);
+          return res.render('error/error', {
+            title: 'Oops!',
+            error: 'Something went saving your account. Please contact our admins to figure out the problem.'
+          });
+        }
+      });
     });
   });
 
-  res.writeHead(302, {
-    'Location': '/login'
-  });
-  res.end();
+  res.render('/login');
 };
 
 
@@ -104,6 +144,7 @@ exports.updatePasswordForm = function(req, res) {
   }, {
     title: 'Update Password'
   }];
+
   res.render('account/forms/password', {
     title: 'Edit Password',
     breadcrumbs: breadcrumbs
@@ -116,28 +157,59 @@ exports.updatePassword = function(req, res) {
   }, function(err, user) {
     if (err) {
       console.log(err);
+      return res.render('error/error', {
+        title: 'Oops!',
+        error: 'Something went wrong changing your password. Please contact our admins to figure out the problem.'
+      });
+    }
+
+    if (user == null || !user) {
+      console.log(err);
+      return res.render('error/error', {
+        title: 'Oops!',
+        error: 'Something went wrong changing your password. Please contact our admins to figure out the problem.'
+      });
     }
 
     bcrypt.compare(req.body.oldpassword, user.password, function(err, result) {
       if (err) {
         console.log(err);
-      }
-      if (res) {
-        user.hash_pw(function(err, hash) {
-          if (err) {
-            console.log(err);
-          }
-
-          user.password = hash;
-          user.save();
+        return res.render('error/error', {
+          title: 'Oops!',
+          error: 'Something went wrong decrypting your password. Please contact our admins to figure out the problem.'
         });
       }
-    });
 
-    res.writeHead(302, {
-      'Location': '/account'
+      if (!result) {
+        return res.render('error/error', {
+          title: 'Invalid Credentials',
+          error: 'The password you entered was incorrect.'
+        });
+      }
+
+
+      user.hash_pw(function(err, hash) {
+        if (err) {
+          console.log(err);
+          return res.render('error/error', {
+            title: 'Oops!',
+            error: 'Something went wrong decrypting your password. Please contact our admins to figure out the problem.'
+          });
+        }
+
+        user.password = hash;
+        user.save(function(err, user) {
+          if (err) {
+            console.log(err);
+            return res.render('error/error', {
+              title: 'Oops!',
+              error: 'Something went wrong saving your password. Please contact our admins to figure out the problem.'
+            });
+          }
+          return res.redirect('/account');
+        });
+      });
     });
-    res.end();
   });
 };
 
