@@ -61,12 +61,16 @@ app.use(session({
     })
 }));
 
+
+
 // Use passport session
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(session({ secret: 'ilovecatscatscatscatscats' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./auth')(passport);
+//require('./auth')(passport);
+
+require('./config.passport')(passport);
 
 app.use(function (req, res, next) {
     res.locals.req = req;
