@@ -62,6 +62,7 @@ app.use(session({
 }));
 
 // Use passport session
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session());
 
