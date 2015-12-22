@@ -9,32 +9,27 @@ var mongoose = require('mongoose'),
 // in MongoDB for each user
 var UserSchema = new Schema({
   firstname: {
-    type: String,
-    required: true
+    type: String
   },
   lastname: {
-    type: String,
-    required: true
+    type: String
   },
   email: {
     type: String,
     required: true
   },
   phone: {
-    type: Number,
-    required: true
+    type: Number
   },
   password: {
     type: String,
     required: true
   },
   address: {
-    type: String,
-    required: true
+    type: String
   },
   postcode: {
-    type: Number,
-    required: true
+    type: Number
   },
   facebookId: {
     type: String
@@ -100,7 +95,7 @@ UserSchema.methods.generateHash = function(password) {
 
 // checking if password is valid
 UserSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.local.password);
+  return bcrypt.compareSync(password, this.password);
 };
 
 

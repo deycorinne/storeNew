@@ -82,12 +82,12 @@ module.exports = function(app) {
   app.post('/' + user.url_end, user.resetPassword); // not sure about this fnc
 
   app.post('/registration', passport.authenticate('local-signup', {
-    successRedirect: '/account',
+    successRedirect: '/login',
     failureRedirect: '/registration'
   }));
 
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/profile',
+    successRedirect: '/dashboard',
     failureRedirect: '/login'
   }));
 
