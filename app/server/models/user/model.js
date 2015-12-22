@@ -15,15 +15,13 @@ var UserSchema = new Schema({
     type: String
   },
   email: {
-    type: String,
-    required: true
+    type: String
   },
   phone: {
     type: Number
   },
   password: {
-    type: String,
-    required: true
+    type: String
   },
   address: {
     type: String

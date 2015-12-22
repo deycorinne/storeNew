@@ -22,7 +22,7 @@ module.exports = function(app) {
   app.get('/category/:url.html', shop.category);
 
   /* account routes */
-  //app.get('/account', account.account);
+  app.get('/account', account.account);
   app.get('/updateAccount', account.updateForm);
   app.post('/updateAccount', account.update);
 
@@ -90,5 +90,12 @@ module.exports = function(app) {
     successRedirect: '/dashboard',
     failureRedirect: '/login'
   }));
+
+  app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+  app.get('/auth/facebook/callback',
+         passport.authenticate('facebook', {
+             successRedirect : '/dashboard/',
+             failureRedirect : '/login'
+         }));
 
 }
