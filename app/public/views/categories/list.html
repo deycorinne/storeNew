@@ -1,57 +1,54 @@
-{% extends '../layouts/dashboard.html' %}
-
-{% block title %} Categories {% endblock %}
-
-{% block content %}
-{% parent %}
+{% extends '../layouts/dashboard.html' %} {% block title %} Categories {% endblock %} {% block content %} {% parent %}
 
 <div id="categories_outline">
 
-{% for category in categories %}
+  {% for category in categories %}
 
-<table id="category_info">
+  <table class="table">
 
     <tr>
-        <td>Name: </td>
-        <td>{{ category.identity }} </td>
+      <td>Name: </td>
+      <td>{{ category.identity }} </td>
     </tr>
     <tr>
-        <td>Segment URL: </td>
-        <td>{{ category.segment_url }}</td>
+      <td>Segment URL: </td>
+      <td>{{ category.segment_url }}</td>
     </tr>
     <tr>
-        <td>Description: </td>
-        <td>{{ category.description }}</td>
+      <td>Description: </td>
+      <td>{{ category.description }}</td>
     </tr>
     <tr>
-        <td>Logo: </td>
-        <td><img src="{{ category.logo }}" id="logo_image"></td>
+      <td>Logo: </td>
+      <td>
+        <img src="{{ category.logo }}" id="logo_image">
+      </td>
     </tr>
     <tr>
-        <td><a href="/editCategory/?_id={{ category._id | safe }}">>Edit</a></td>
-        </tr>
+      <td><a href="/editCategory/?_id={{ category._id | safe }}">>Edit</a></td>
+    </tr>
     <tr>
-        <td><a class="confirm" href="/delete_category/?_id={{ category._id  | safe }}">>Delete</a></td>
-        </tr>
-    </table>
+      <td><a class="confirm" href="/delete_category/?_id={{ category._id  | safe }}">>Delete</a></td>
+    </tr>
+  </table>
 
-{% endfor %}
+  {% endfor %}
 </div>
 
-    <div id="create_button"><form action="/createCategory/"><input type="submit" value="Create a new category!"></form></div>
+<form action="/createCategory/">
+  <input type="submit" class="btn btn-default" value="Create a new category!">
+</form>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>
-
-    $(".confirm").on("click", function(event){
-        if(confirm("Are you sure you want to delete this category? \nIf you do, all products with this category will also be delted.")){
-            return true;
-        } else {
-            event.preventDefault();
-            return false;
-        }
-    });
-
+  $(".confirm").on("click", function(event) {
+    if (confirm("Are you sure you want to delete this category? \nIf you do, all products with this category will also be delted.")) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  });
 </script>
 {% endblock %}
