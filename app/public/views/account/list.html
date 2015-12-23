@@ -1,28 +1,25 @@
-{% extends '../layouts/dashboard.html' %}
+{% extends '../layouts/dashboard.html' %} {% block title %} Categories {% endblock %} {% block content %} {% parent %}
+<div class="container">
 
-{% block title %} Categories {% endblock %}
+  <table class="table">
+    <tr>
+      <td>{{ req.user.firstname }} {{ req.user.lastname }} </td>
+    </tr>
+    <tr>
+      <td>{{ req.user.email }}</td>
+    </tr>
+    <tr>
+      <td>{{ req.user.address }} {{ req.user.postcode }}</td>
+    </tr>
+    <tr>
+      <td><a href="/updatePassword/">>Update Password</a></td>
+    </tr>
+    <tr>
+      <td><a href="/updateAccount/">>Update Account</a></td>
+    </tr>
+  </table>
 
-{% block content %}
-{% parent %}
-
-
-<table id="account_info" >
-    <tr>
-        <td>{{ req.user.firstname }} {{ req.user.lastname }} </td>
-    </tr>
-    <tr>
-        <td>{{ req.user.email }}</td>
-    </tr>
-    <tr>
-        <td>{{ req.user.address }} {{ req.user.postcode }}</td>
-    </tr>
-    <tr>
-        <td><a href="/updatePassword/">>Update Password</a></td>
-    </tr>
-    <tr>
-        <td><a href="/updateAccount/">>Update Account</a></td>
-    </tr>
-</table>
+</div>
 
 
 

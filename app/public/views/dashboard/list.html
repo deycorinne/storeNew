@@ -1,22 +1,50 @@
-{% extends '../layouts/main.html' %}
-
-{% block title %} Dashboard {% endblock %}
-
-{% block content %}
-
-<ol class="breadcrumb">
+{% extends '../layouts/main.html' %} {% block title %} Dashboard {% endblock %} {% block content %}
+<div class="container">
+  <ol class="breadcrumb">
     <li class="active">Dashboard</li>
-</ol>
+  </ol>
 
-<ul id="dashboard">
-    <a href="/account/"><li>Account</li></a>
-    <a href="/categories/"><li>Categories</li></a>
-    <a href="/tags/"><li>Tags</li></a>
-    <a href="/brands/"><li>Brands</li></a>
-    <a href="/products/"><li>Products</li></a>
-    <!--<a href="/logout/"><li>Logout</li></a>-->
-</ul>
+  <table class="table">
+    <tr>
+      <td>
+        <a href="/account/">
+          Account
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/categories/">
+          Categories
+        </a>
+      </td>
+    </tr>
 
-{% endblock %}
+    <tr>
+      <td>
+        <a href="/tags/">
+          Tags
+        </a>
+      </td>
+    </tr>
 
-{% block footer %}{% endblock %}
+    <tr>
+      <td>
+        <a href="/brands/">
+          Brands
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <a href="/products/">
+          Products
+        </a>
+      </td>
+    </tr>
+    </tr>
+  </table>
+</div>
+
+{% endblock %} {% block footer %}{% endblock %}

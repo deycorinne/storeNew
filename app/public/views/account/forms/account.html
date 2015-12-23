@@ -1,49 +1,43 @@
-{% extends '../../layouts/dashboard.html' %}
+{% extends '../../layouts/dashboard.html' %} {% block title %} Edit Account {% endblock %} {% block content %} {% parent %}
 
-{% block title %} Create Tag {% endblock %}
+<div class="container">
+  <form id="edit_account" onsubmit="return false;" method="post">
 
-{% block content %}
-{% parent %}
+    <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input class="form-control" type="text" id="firstname" name="firstname" value="{{ req.user.firstname }}">
+    </div>
 
-    <form id="edit_account" onsubmit="return false;" method="post">
-        <table align="center">
-            <div id="input">
-                <tr><div id="input_name">First Name</div></tr>
-                <tr><input type="text" id="firstname" name ="firstname" value="{{ req.user.firstname }}"></tr>
-            </div>
+    <div class="form-group">
+      <label for="lastname">Last Name</label>
+      <input class="form-control" type="text" id="lastname" name="lastname" value="{{ req.user.lastname }}">
+    </div>
 
-            <div id="input">
-                <tr><div id="input_name">Last Name</div></tr>
-                <tr><input type="text" id="lastname" name ="lastname" value="{{ req.user.lastname }}"></tr>
-            </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input class="form-control" type="text" id="email" name="email" value="{{ req.user.email }}">
+    </div>
 
-            <div id="input">
-                <tr><div id="input_name">Email</div></tr>
-                <tr><input type="text" id="email" name="email" value="{{ req.user.email }}"></tr>
-            </div>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input class="form-control" type="number" id="phone" name="phone" value="{{ req.user.phone }}">
+    </div>
 
-            <div id="input">
-                <tr><div id="input_name">Phone</div></tr>
-                <tr><input type="number" id="phone" name="phone" value="{{ req.user.phone }}"></tr>
-            </div>
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input class="form-control" type="text" id="address" name="address" value="{{ req.user.address }}">
+    </div>
 
-            <div id="input">
-                <tr><div id="input_name">Home Address</div></tr>
-                <tr><input type="text" id="address" name="address" value="{{ req.user.address }}"></tr>
-            </div>
+    <div class="form-group">
+      <label for="postcode">Postal Code</label>
+      <input class="form-control" type="number" id="postcode" name="postcode" value="{{ req.user.postcode }}">
+    </div>
 
+    <!--SUBMIT BUTTON -->
+    <input type="submit" class="btn btn-default" value="SUBMIT" onClick="formValidation()">
+    <a type="button" onClick="location.href='/account/'">CANCEL</a>
 
-            <div id="input">
-                <tr><div id="input_name">Postal Code</div></tr>
-                <tr><input type="number" id="postcode" name="postcode" value="{{ req.user.postcode }}"></tr>
-            </div>
-        </table>
-
-        <!--SUBMIT BUTTON -->
-        <input type="submit" value="SUBMIT" onClick="formValidation()">
-        <input type="button" onClick="location.href='/account/'" value="CANCEL">
-
-    </form>
+  </form>
 </div>
 
 <!-- JavaScript -->

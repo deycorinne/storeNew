@@ -13,6 +13,12 @@ body {
   margin-top: 100px;
 }
 .nav>li {
-    position: relative;
-    display: block;
+  position: relative;
+  display: block;
+}
+form-control {
+  width: 200px;
+}
+.table>tbody>tr>td {
+  border-top: none !important;
 }
