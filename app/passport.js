@@ -1,6 +1,8 @@
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('./server/models/user/model.js');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var TwitterStrategy = require('passport-twitter').Strategy;
+
 var config = require('./config');
 
 module.exports = function(passport) {
@@ -82,7 +84,7 @@ module.exports = function(passport) {
     }));
 
 
-  passport.use(new FacebookStrategy({
+  passport.use('facebook', new FacebookStrategy({
       clientID: config.facebook.clientID,
       clientSecret: config.facebook.clientSecret,
       callbackURL: config.facebook.callbackURL
@@ -105,10 +107,16 @@ module.exports = function(passport) {
             return done(null, user); // user found, return that user
           } else {
             var newUser = new User();
+            var name = profile.displayName.split(' ');
+            var firstName = name[0];
+            var lastName = name[name.length - 1];
 
             newUser.facebookId = profile.id;
             newUser.facebookToken = token;
             newUser.facebookName = profile.name.displayName;
+            newUser.firstname = firstName;
+            newUser.lastname = lastName;
+
             if (profile.emails) {
               newUser.facebookEmail = profile.emails[0].value;
             }
@@ -120,9 +128,52 @@ module.exports = function(passport) {
               return done(null, newUser);
             });
           }
-
         });
       });
-
     }));
+
+  passport.use('twitter', new TwitterStrategy({
+      consumerKey: config.twitter.consumerKey,
+      consumerSecret: config.twitter.consumerSecret,
+      callbackURL: config.twitter.callbackURL
+    },
+    function(token, tokenSecret, profile, done) {
+      process.nextTick(function() {
+        console.log('called');
+
+        User.findOne({
+          'twitterId': profile.id
+        }, function(err, user) {
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+
+          if (user) {
+            return done(null, user); // user found, return that user
+          } else {
+            var newUser = new User();
+            var name = profile.displayName.split(' ');
+            var firstName = name[0];
+            var lastName = name[name.length - 1];
+
+            newUser.twitterId = profile.id;
+            newUser.twitterToken = token;
+            newUser.twitterUsername = profile.username;
+            newUser.twitterDisplayName = profile.displayName;
+            newUser.firstname = firstName;
+            newUser.lastname = lastName;
+
+            newUser.save(function(err) {
+              if (err) {
+                console.log(err);
+                throw err;
+              }
+              return done(null, newUser);
+            });
+          }
+        });
+      });
+    }));
+
 };

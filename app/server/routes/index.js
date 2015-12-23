@@ -81,6 +81,8 @@ module.exports = function(app) {
   app.post('/restorePasswordErrorForm', user.sendEmail);
   app.post('/' + user.url_end, user.resetPassword); // not sure about this fnc
 
+
+  /* Passport routes */
   app.post('/registration', passport.authenticate('local-signup', {
     successRedirect: '/login',
     failureRedirect: '/registration'
@@ -91,11 +93,22 @@ module.exports = function(app) {
     failureRedirect: '/login'
   }));
 
-  app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+  app.get('/auth/facebook', passport.authenticate('facebook', {
+    scope: 'email'
+  }));
+
   app.get('/auth/facebook/callback',
-         passport.authenticate('facebook', {
-             successRedirect : '/dashboard/',
-             failureRedirect : '/login'
-         }));
+    passport.authenticate('facebook', {
+      successRedirect: '/dashboard/',
+      failureRedirect: '/login'
+    }));
+
+  app.get('/auth/twitter', passport.authenticate('twitter'));
+
+  app.get('/auth/twitter/callback',
+    passport.authenticate('twitter', {
+      successRedirect: '/dashboard/',
+      failureRedirect: '/login'
+    }));
 
 }

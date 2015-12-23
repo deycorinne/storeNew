@@ -10,10 +10,12 @@
       <a class="navbar-brand" href="/">NATION COUTURE.</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
-
+      
+      {% if req.isAuthenticated() %}
       <ul class="nav navbar-nav ">
         <li><a href='/account/'>  Welcome, {{ req.user.firstname }}</a></li>
       </ul>
+      {% endif %}
 
       <ul class="nav navbar-nav navbar-right">
 

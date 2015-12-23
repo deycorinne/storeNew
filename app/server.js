@@ -42,7 +42,7 @@ swig.setFilter('contains', function(arr, value) {
   return arr.indexOf(value) !== -1;
 });
 
-app.use(favicon(__dirname + '/public/favicon.ico'));
+//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
