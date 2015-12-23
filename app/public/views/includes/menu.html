@@ -1,31 +1,39 @@
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">NATION COUTURE.</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
 
-<div id="top">
-    <div id="store_name">NATION COUTURE.</div>
+      <ul class="nav navbar-nav ">
+        <li><a href='/account/'>  Welcome, {{ req.user.firstname }}</a></li>
+      </ul>
 
-    <div id="navigation">
+      <ul class="nav navbar-nav navbar-right">
+
 
         {% if req.isAuthenticated() %}
 
-            <div id="user_menu">
-                WELCOME,<a href='/account/'>{{ req.user.email }}</a>
-                <a href='/'>SHOP</a>
-                <a href='/dashboard/'>DASHBOARD</a>
-                <a href='/logout/'>LOGOUT</a>
-            </div>
+        <li><a href="/">SHOP</a></li>
+        <li><a href="/dashboard/">DASHBOARD</a></li>
+        <li><a href='/logout/'>LOGOUT</a></li>
+
 
         {% else %}
 
-            <div id="guest_menu">
-                <a href='/login/'>LOGIN</a>
-                <a href='/registration/'>SIGN UP</a>
-            </div>
+        <li><a href="/login/">LOGIN</a></li>
+        <li><a href='/registration/'>SIGN UP</a></li>
 
         {% endif %}
 
-
-        <!--<input type="search" id="search" placeholder="Search..." />-->
-
-
+      </ul>
     </div>
-
-</div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>

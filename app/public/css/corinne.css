@@ -1,0 +1,18 @@
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #595959;
+  font-family: Arial Narrow;
+}
+body {
+  background: white;
+  padding-bottom: 40px;
+  position: relative;
+  margin-top: 100px;
+}
+.nav>li {
+    position: relative;
+    display: block;
+}
