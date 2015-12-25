@@ -14,7 +14,7 @@ exports.updateForm = function (req, res) {
 
     Tag.findOne({_id: req.query._id}, function (err, tag) {
         if (err) { console.log(err); }
-        res.render('edit_tag/edit_tag', {title: 'Edit Tag', tag: tag, breadcrumbs: breadcrumbs});
+        res.render('tags/forms/edit', {title: 'Edit Tag', tag: tag, breadcrumbs: breadcrumbs});
     });
 
 };
