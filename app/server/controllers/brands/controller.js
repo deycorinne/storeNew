@@ -15,7 +15,7 @@ exports.updateForm = function (req, res) {
 
     Brand.findOne({_id: req.query._id}, function (err, brand) {
         if (err) {console.log(err);}
-        res.render('edit_brand/edit_brand', {title: 'Edit Brand', brand: brand, breadcrumbs: breadcrumbs});
+        res.render('brands/forms/edit', {title: 'Edit Brand', brand: brand, breadcrumbs: breadcrumbs});
     });
 
 };
@@ -28,7 +28,7 @@ exports.get = function (req, res) {
 
     Brand.find({}, function(err, brands) {
         if (err) { console.log(err);}
-        res.render('brands/brands', {title: 'Brands', brands: brands, breadcrumbs: breadcrumbs});
+        res.render('brands/list', {title: 'Brands', brands: brands, breadcrumbs: breadcrumbs});
     });
 
 };
@@ -74,7 +74,7 @@ exports.createForm = function (req, res) {
         {title: 'Brands', link: '/brands/'},
         {title: 'Create Brand'}
     ];
-    res.render('create_brand/create_brand', {title: 'Create Brand', breadcrumbs: breadcrumbs});
+    res.render('brands/forms/create', {title: 'Create Brand', breadcrumbs: breadcrumbs});
 };
 
 
@@ -105,10 +105,7 @@ exports.create = function (req, res) {
             });
         } else {
             var error = "Oops! A brand with that name is already in our system. Please create another.";
-            res.render('create_brand/create_brand', {title: 'Create Brand', breadcrumbs: breadcrumbs, error: error });
+            res.render('brands/forms/create', {title: 'Create Brand', breadcrumbs: breadcrumbs, error: error });
         }
     });
 };
-
-
-

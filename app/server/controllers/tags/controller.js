@@ -27,7 +27,7 @@ exports.get = function (req, res) {
 
     Tag.find({}, function(err, tags) {
         if (err) { console.log(err); }
-        res.render('tags/tags', {title: 'Tags', tags: tags, breadcrumbs: breadcrumbs});
+        res.render('tags/list', {title: 'Tags', tags: tags, breadcrumbs: breadcrumbs});
     });
 
 };
@@ -81,7 +81,7 @@ exports.createForm = function (req, res) {
         {title: 'Create Tag'}
     ];
 
-    res.render('create_tag/create_tag', {title: 'Create Tag', breadcrumbs: breadcrumbs});
+    res.render('tags/forms/create', {title: 'Create Tag', breadcrumbs: breadcrumbs});
 };
 
 
@@ -102,15 +102,14 @@ exports.create = function (req, res) {
             newTag.save(function (err) {
                 if (err) {
                     var error = "Oops! There was a problem creating your tag. Please try again.";
-                    res.render('create_tag/create_tag', {title: 'Create Tag', breadcrumbs: breadcrumbs, error: error });
+                    res.render('tags/forms/create', {title: 'Create Tag', breadcrumbs: breadcrumbs, error: error });
                 } else {
                     res.redirect("/tags/");
                 }
             });
         } else {
             var error = "Oops! A tag with that name is already in our system. Please create another.";
-            res.render('create_tag/create_tag', {title: 'Create Tag', breadcrumbs: breadcrumbs, error: error });
+            res.render('tags/forms/create', {title: 'Create Tag', breadcrumbs: breadcrumbs, error: error });
         }
     });
 };
-

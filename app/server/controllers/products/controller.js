@@ -17,7 +17,7 @@ exports.get = function (req, res) {
 
     Product.find({}, function(err, products) {
         if (err) { console.log(err);}
-        res.render('products/products', {title: 'Products', products: products, breadcrumbs: breadcrumbs});
+        res.render('products/list', {title: 'Products', products: products, breadcrumbs: breadcrumbs});
     });
 };
 
@@ -35,7 +35,7 @@ exports.createForm = function (req, res) {
             if (err) { console.log(err);}
             Brand.find({}, function(err, brands) {
                 if (err) { console.log(err);}
-                res.render('create_product/create_product', {title: 'Create Product',categories: categories, tags: tags, brands: brands, breadcrumbs: breadcrumbs});
+                res.render('products/forms/create', {title: 'Create Product',categories: categories, tags: tags, brands: brands, breadcrumbs: breadcrumbs});
             });
         });
     });
@@ -80,7 +80,7 @@ exports.create = function (req, res) {
                                     Brand.find({}, function(err, brands) {
                                         if (err) { console.log(err);}
                                         var error = "Oops! A there was a problem creating your product. Please try again.";
-                                        res.render('create_product/create_product', {title: 'Create Product',categories: categories, tags: tags, brands: brands, breadcrumbs: breadcrumbs, error: error });
+                                        res.render('products/forms/create', {title: 'Create Product',categories: categories, tags: tags, brands: brands, breadcrumbs: breadcrumbs, error: error });
                                     });
                                 });
                             });
@@ -100,7 +100,7 @@ exports.create = function (req, res) {
                     Brand.find({}, function(err, brands) {
                         if (err) { console.log(err);}
                         var error = "Oops! A product with that name is already in our system. Please create another.";
-                        res.render('create_product/create_product', {title: 'Create Product',categories: categories, tags: tags, brands: brands, breadcrumbs: breadcrumbs, error: error });
+                        res.render('products/forms/create', {title: 'Create Product',categories: categories, tags: tags, brands: brands, breadcrumbs: breadcrumbs, error: error });
                     });
                 });
             });
@@ -127,7 +127,7 @@ exports.updateForm = function (req, res) {
                 Brand.find({'identity':{'$ne':product.brands}}, function(err, brands) {
                     if (err) { console.log(err);}
 
-                    res.render('edit_product/edit_product', {title: 'Edit Product', product: product, categories: categories, tags: tags, brands: brands, breadcrumbs: breadcrumbs
+                    res.render('products/forms/edit', {title: 'Edit Product', product: product, categories: categories, tags: tags, brands: brands, breadcrumbs: breadcrumbs
                     });
                 });
             });
