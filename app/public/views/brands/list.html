@@ -1,54 +1,49 @@
-{% extends '../layouts/dashboard.html' %}
-
-{% block title %} Brands {% endblock %}
-
-{% block content %}
-{% parent %}
+{% extends '../layouts/dashboard.html' %} {% block title %} Brands {% endblock %} {% block content %} {% parent %}
 
 <div id="brands_outline">
 
-{% for brand in brands %}
+  {% for brand in brands %}
 
-<table id="brand_info">
+  <table class="table">
 
     <tr>
-        <td>Name: </td>
-        <td>{{ brand.identity }} </td>
+      <td>Name: </td>
+      <td>{{ brand.identity }} </td>
     </tr>
     <tr>
-        <td>Segment URL: </td>
-        <td>{{ brand.segment_url }}</td>
+      <td>Segment URL: </td>
+      <td>{{ brand.segment_url }}</td>
     </tr>
     <tr>
-        <td>Description: </td>
-        <td>{{ brand.description }}</td>
+      <td>Description: </td>
+      <td>{{ brand.description }}</td>
     </tr>
     <tr>
-        <td><a href="/edit_brand/?_id={{ brand._id | safe }}">>Edit</a></td>
+      <td><a href="/updateBrand?_id={{ brand._id | safe }}">>Edit</a></td>
     </tr>
     <tr>
-        <td><a class="confirm" href="/delete_brand/?_id={{ brand._id  | safe }}">>Delete</a></td>
+      <td><a class="confirm" href="/deleteBrand?_id={{ brand._id  | safe }}">>Delete</a></td>
     </tr>
-</table>
+  </table>
 
-{% endfor %}
+  {% endfor %}
 
 </div>
 
-<div id="create_button"><form action="/createBrand/"><input type="submit" value="Create a new brand!"></form></div>
+<form action="/createBrand/">
+  <input type="submit" class="btn btn-default" value="Create a new brand!">
+</form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>
-
-    $(".confirm").on("click", function(event){
-        if(confirm("Are you sure you want to delete this brand?")){
-            return true;
-        } else {
-            event.preventDefault();
-            return false;
-        }
-    });
-
+  $(".confirm").on("click", function(event) {
+    if (confirm("Are you sure you want to delete this brand?")) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  });
 </script>
 
 {% endblock %}

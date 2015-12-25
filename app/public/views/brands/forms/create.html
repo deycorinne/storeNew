@@ -1,45 +1,60 @@
-{% extends '../../layouts/dashboard.html' %}
+{% extends '../../layouts/dashboard.html' %} {% block title %} Categories {% endblock %} {% block content %} {% parent %}
+<div class="container">
+  <div id="error">{{ error }}</div>
 
-{% block title %} Categories {% endblock %}
 
-{% block content %}
-{% parent %}
+  <form id="create_brand" onsubmit="return false;" method="post" enctype="multipart/form-data">
 
-<div id="error">{{ error }}</div>
+    <div id="input">
 
-<!-- Begin Form -->
-<form id="create_brand" onsubmit="return false;" method="post" enctype="multipart/form-data">
-    <table align="center">
-        <div id="input">
-            <tr><div id="input_name">Name</div></tr>
-            <tr><input type="text" id="identity" name="identity"></tr>
-        </div>
-        <div id="input">
-            <tr><div id="input_name">Segment URL</div></tr>
-            <tr><input type="text" id="segment_url" name="segment_url"></tr>
-        </div>
-        <div id="input">
-            <tr><div id="input_name">Key Words</div></tr>
-            <tr><input type="text" id="key_words" name="key_words"></tr>
-        </div>
-        <div id="input">
-            <tr><div id="input_name">Description</div></tr>
-            <tr><input type="textarea" id="description" name="description"></tr>
-        </div>
-        <div id="input">
-            <tr><div id="input_name">Content</div></tr>
-            <tr><textarea rows="10" cols="38" id="cont" name="cont"></textarea></tr>
-        </div>
-    </table>
+      <div id="input_name">Name</div>
+
+
+      <input type="text" id="identity" name="identity">
+
+    </div>
+    <div id="input">
+
+      <div id="input_name">Segment URL</div>
+
+
+      <input type="text" id="segment_url" name="segment_url">
+
+    </div>
+    <div id="input">
+
+      <div id="input_name">Key Words</div>
+
+
+      <input type="text" id="key_words" name="key_words">
+
+    </div>
+    <div id="input">
+
+      <div id="input_name">Description</div>
+
+
+      <input type="textarea" id="description" name="description">
+
+    </div>
+    <div id="input">
+
+      <div id="input_name">Content</div>
+
+
+      <textarea rows="10" cols="38" id="cont" name="cont"></textarea>
+
+    </div>
+
     <!--SUBMIT BUTTON -->
     <input type="submit" value="SUBMIT" onClick="formValidation()">
     <input type="button" onClick="location.href='/brands/'" value="CANCEL">
 
 
-</form>
+  </form>
 
-<!-- JavaScript -->
-<script src="/js/create_brand.js" type="text/javascript"></script>
+  <!-- JavaScript -->
+  <script src="/js/create_brand.js" type="text/javascript"></script>
 
 
-{% endblock %}
+  {% endblock %}
